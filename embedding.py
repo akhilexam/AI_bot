@@ -28,7 +28,7 @@ def find_best_match(user_question):
     best_score = -1
 
     for doc in documents:
-        doc_embedding = np.array(doc["embedding"])  # Convert stored embedding to NumPy array
+        doc_embedding =np.array(eval(doc["embedding"]), dtype=np.float32)  # Convert stored embedding to NumPy array
         similarity = cosine_similarity(user_embedding, doc_embedding)
 
         if similarity > best_score:
