@@ -29,4 +29,3 @@ if st.button("Add to Database"):
             st.error(f"Error adding data: {e}")
     else:
         st.warning("Please provide both question and answer.")
-
