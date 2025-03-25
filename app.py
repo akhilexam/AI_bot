@@ -1,6 +1,6 @@
 import streamlit as st
-from app.database import add_document, fetch_all_documents
-from app.embeddings import get_embedding, find_best_match
+from database import add_document, fetch_all_documents
+from embedding import get_embedding, find_best_match
 
 st.title("AI-Powered Q&A Bot with Supabase 🚀")
 st.write("Ask any question, and I'll find the best answer!")
