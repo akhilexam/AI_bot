@@ -1,20 +1,15 @@
-import openai
+from sentence_transformers import SentenceTransformer
 import numpy as np
-from config import OPENAI_API_KEY
 from database import fetch_all_documents  # Ensure this function is properly defined
 
-# Initialize OpenAI client
-client = openai.OpenAI(api_key=OPENAI_API_KEY)
+# Load the embedding model (runs locally)
+model = SentenceTransformer("all-MiniLM-L6-v2")  # Efficient and accurate
 
 def get_embedding(text):
     """
-    Generate an embedding vector using OpenAI.
+    Generate an embedding vector using SentenceTransformers.
     """
-    response = client.embeddings.create(
-        input=text,
-        model="text-embedding-ada-002"
-    )
-    return np.array(response.data[0].embedding)  # Extract the embedding vector
+    return np.array(model.encode(text, normalize_embeddings=True))  # Normalize for better similarity
 
 def cosine_similarity(vec1, vec2):
     """
@@ -41,3 +36,5 @@ def find_best_match(user_question):
             best_match = doc
 
     return best_match["answer"] if best_match else "No relevant answer found."
+
+
